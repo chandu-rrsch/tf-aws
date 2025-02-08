@@ -7,13 +7,12 @@ To setup `aws-s3` as remote backend for terraform project,
     > terraform init
 3. plan terraform
     > terraform plan
-4. run terraform
+4. run the code
     > terraform apply 
+5. destroy provisioned infra
+    > terraform destroy 
 
 
-Route 53 --> Load balancer --> vpc --> instance-1
-                                    \
-                                      -> instance-2
-
+> note: manage the state files properly
 
                         
