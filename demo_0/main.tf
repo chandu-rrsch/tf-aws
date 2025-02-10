@@ -42,19 +42,24 @@ resource "aws_instance" "demo_instances" {
 resource "aws_security_group" "demo0" {
 
   tags = {
-    name = "demo0"
+    Name = "demo0"
   }
   ingress {
     from_port = 80
     to_port   = 80
     protocol  = "TCP"
-
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
+    from_port = 22
+    to_port   = 22
+    protocol  = "TCP"
     cidr_blocks = ["0.0.0.0/0"]
   }
   egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "TCP"
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
@@ -65,7 +70,7 @@ resource "aws_lb_target_group" "demo0" {
   vpc_id   = data.aws_vpc.default.id
 
   tags = {
-    name = "demo0"
+    Name = "demo0"
   }
 
   health_check {
@@ -90,7 +95,7 @@ resource "aws_lb" "demo0" {
   subnets            = data.aws_subnets.default.ids
 
   tags = {
-    name = "demo0"
+    Name = "demo0"
   }
 }
 
@@ -105,6 +110,6 @@ resource "aws_lb_listener" "demo0" {
   }
 
   tags = {
-    name = "demo0"
+    Name = "demo0"
   }
 }
